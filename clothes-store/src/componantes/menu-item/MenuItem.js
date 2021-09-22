@@ -1,11 +1,15 @@
 import React from 'react' 
 
-import './menu-item.styles.scss'
+import './menu-item.styles.scss' 
 
-const Menu-item = ({title}) => {
+const MenuItem = ({title ,imageUrl ,size }) => {
     return (
-        <div>
-               <div className='menu-item' > 
+        <div style={{
+            background : `url(${imageUrl})` 
+
+        }} 
+        > 
+               <div   className={`${size} menu-item`} > 
             <div className='content'  > 
             <h1  className='title' >  {title}  </h1> 
             <span className='subtitle'   >  SHOP NOW   </span>  
@@ -15,4 +19,5 @@ const Menu-item = ({title}) => {
     )
 }
 
-export default Menu-item; 
+export default MenuItem; 
+ 
