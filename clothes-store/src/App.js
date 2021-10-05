@@ -14,7 +14,7 @@ constructor(props) {
   super(props)
 
   this.state = {
-     creentUser : null 
+    currentUser : null 
   }
 }
 
@@ -22,38 +22,65 @@ constructor(props) {
 
 unsubscribeFromAuth =null 
 
-//////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
+
 
 componentDidMount() {
-  this.unsubscribeFromAuth =   auth.onAuthStateChanged( async user => {
 
-    await  creatuserprofileDocument(user); 
+  this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+    if (userAuth) {
 
-     console.log(user); /// (user)  obj from google autu  
-  }) 
-   
+      const userRef = await creatuserprofileDocument(userAuth); //// make useRef as an new obj which have ( email,displayName) for use it in our app 
+
+
+
+      userRef.onSnapshot(snapShot => {
+        
+        this.setState({
+
+          currentUser: {
+            id: snapShot.id,
+            ...snapShot.data()
+          }
+        });
+
+        console.log(this.state); 
+      });
+    }
+
+    
+      else {
+
+        this.setState({ currentUser: userAuth });
+      }
+       
+    
+  });
 }
-///////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
 componentWillUnmount() { 
   this.unsubscribeFromAuth(); 
 }
 
-
-
-
+////////////////////////////////////////////////////////////////////////////////////////////
 
   render() {
     return (
       <div>
   
-        <Header creentUser={this.state.creentUser} /> 
+        <Header creentUser={this.state.currentUser} /> 
        
         <Switch>
   
           <Route exact path="/" component={Homepage} />
           <Route exact path="/shop" component={ShopPage} />
-          <Route exact path="/signIn" component={SiginInSignUp} /> 
+          <Route exact path="/signIn" component={SiginInSignUp} />  
   
        
         </Switch>

@@ -13,7 +13,10 @@ const config = {
 };
 
 firebase.initializeApp(config);
-export const auth = firebase.auth();
+export const auth = firebase.auth(); 
+
+
+
 
 export const creatuserprofileDocument = async (userAuth,additionalData) => {
   if (!userAuth) return; /// not null if login
@@ -22,11 +25,11 @@ export const creatuserprofileDocument = async (userAuth,additionalData) => {
 
   const snapshot = await userRef.get(); /// use snap shot to acces exists prop which important to make data not requiered ///
 
-  console.log(snapshot);
+  // console.log(snapshot);
   // console.log(userRef);
 
   if (!snapshot.exists) {
-    const { displayName, email } = userAuth;
+    const { displayName, email } = userAuth; 
 
     const createdAt = new Date();
 

@@ -29,6 +29,8 @@ handelSubmit = (e) => {
 
 handelChange = (e) =>{
   
+    e.preventDefault()
+
     const {value,name} = e.target 
     this.setState({
         [name] : value 

@@ -18,3 +18,6 @@ export default function FormInput({ hChange, label, ...otherProps }) {
     </div>
   );
 }
+
+
+//// this componanet make just for style shrink /// not to break the element 
