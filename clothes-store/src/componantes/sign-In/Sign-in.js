@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
 import './Sign-in.styles.scss'
 import CustoumButton from '../../componantes/Coustem-button/Custoum-button' 
-import { signInWithGoogle } from '../../firebase/firebase.utils'
-
-
-
+import {auth, signInWithGoogle } from '../../firebase/firebase.utils'
 import FormInput from '../form-input/form-Input' 
 
 export class SignIn extends Component {
@@ -19,17 +16,28 @@ export class SignIn extends Component {
     }
 ///////////////////////////////////////////////////////
 
-handelSubmit = (e) => {
+handelSubmit = async (e) => {
         e.preventDefault() 
 
-        this.setState({ email : '',  password: '' }) 
+        const {email,password} = this.state;
+
+        try { 
+
+          await  auth.signInWithEmailAndPassword(email,password)
+
+          this.setState({ email : '',  password: '' }) 
+            
+        } catch (error) {
+            
+        console.log(error);
+        }
+
     }
 
 ////////////////////////////////////////////////////////
 
 handelChange = (e) =>{
-  
-    e.preventDefault()
+   
 
     const {value,name} = e.target 
     this.setState({
