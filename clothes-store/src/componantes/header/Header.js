@@ -1,12 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom' 
 import { ReactComponent as Logo} from '../../assets/crown.svg' // from svg file 
-import { auth } from '../../firebase/firebase.utils'
+import { auth } from '../../firebase/firebase.utils' 
+import { connect } from 'react-redux' 
 
 import './header.styles.scss'
 
 
-export default function Header({creentUser}) {
+function Header({creentUser}) {
     return (
         <div className='header'>
 
@@ -35,4 +36,12 @@ export default function Header({creentUser}) {
 
         </div>
     )
-}
+} 
+
+
+const mapStateToProps = state => ({  
+
+    creentUser :state.user.currentUser 
+})
+
+export default  connect(mapStateToProps)(Header);
