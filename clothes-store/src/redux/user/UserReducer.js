@@ -1,10 +1,15 @@
+
+import { UserActionTypes} from './user.type'
+
+
+
 const INITIAL_STATE = {
     currentUser : null 
 }
 
 const userReaducer = (state =INITIAL_STATE,action) => {
 
-    if (action.type === 'SET_CURRENT_USER') {
+    if (action.type  === UserActionTypes.SET_CURRENT_USER) { 
         return {
             ...state, 
             currentUser : action.payload 
@@ -13,9 +18,9 @@ const userReaducer = (state =INITIAL_STATE,action) => {
     }
 
     else {
-        return state; 
+        return state;  
     }
 
 }
 
-export default userReaducer ;
+export default userReaducer ; 
